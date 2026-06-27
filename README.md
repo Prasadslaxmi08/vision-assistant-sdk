@@ -165,7 +165,6 @@ and a one-click PDF mission report — is documented end to end:
 - **Runnable example:** [`examples/tkinter_gcs/`](examples/tkinter_gcs/) — a minimal,
   self-contained mini-GCS that owns its own camera and embeds the SDK.
 
-![Before / after](docs/integration/screenshot_before_after.png)
 
 ---
 
