@@ -1,0 +1,1153 @@
+{
+  "modalities": [
+    "EO",
+    "IR"
+  ],
+  "sensors": [
+    {
+      "modality": "EO",
+      "analysis": "** The image depicts a grassy outdoor area with some trees in the background. There are two tables with various items on them, including what appears to be electronic devices and tools. The grass is uneven, suggesting it might be a makeshift workspace or a campsite. The presence of multiple tables and items suggests some level of activity, possibly related to work or research.",
+      "objects": [
+        {
+          "class": "person",
+          "confidence": 0.864,
+          "bbox": [
+            447.7,
+            358.3,
+            502.7,
+            529.1
+          ],
+          "location": "centre",
+          "observation": "**person (conf 0.86, centre)**: Could not be confirmed.",
+          "uncertain": false
+        },
+        {
+          "class": "person",
+          "confidence": 0.858,
+          "bbox": [
+            342.5,
+            353.1,
+            408.5,
+            477.1
+          ],
+          "location": "middle-left",
+          "observation": "**person (conf 0.86, middle-left)**: Could not be confirmed.",
+          "uncertain": false
+        },
+        {
+          "class": "person",
+          "confidence": 0.794,
+          "bbox": [
+            259.9,
+            574.0,
+            344.1,
+            639.9
+          ],
+          "location": "lower-left",
+          "observation": "**person (conf 0.79, lower-left)**: Could not be confirmed.",
+          "uncertain": false
+        },
+        {
+          "class": "dining table",
+          "confidence": 0.578,
+          "bbox": [
+            283.9,
+            526.6,
+            402.2,
+            616.0
+          ],
+          "location": "lower-left",
+          "observation": "**dining table (conf 0.58, lower-left)**: Appears to have some electronic devices and tools on it.",
+          "uncertain": false
+        },
+        {
+          "class": "person",
+          "confidence": 0.507,
+          "bbox": [
+            238.8,
+            622.9,
+            284.3,
+            675.8
+          ],
+          "location": "lower-left",
+          "observation": "**person (conf 0.51, lower-left)**: Could not be confirmed.",
+          "uncertain": false
+        },
+        {
+          "class": "dining table",
+          "confidence": 0.466,
+          "bbox": [
+            68.1,
+            464.3,
+            233.0,
+            642.0
+          ],
+          "location": "lower-left",
+          "observation": "**dining table (conf 0.47, lower-left)**: Appears to have some electronic devices and tools on it.",
+          "uncertain": false
+        },
+        {
+          "class": "person",
+          "confidence": 0.451,
+          "bbox": [
+            566.5,
+            347.5,
+            599.5,
+            379.5
+          ],
+          "location": "centre",
+          "observation": "**person (conf 0.45, centre)**: Could not be confirmed.",
+          "uncertain": false
+        },
+        {
+          "class": "bench",
+          "confidence": 0.449,
+          "bbox": [
+            528.7,
+            327.2,
+            628.8,
+            394.8
+          ],
+          "location": "centre",
+          "observation": "**bench (conf 0.45, centre)**: Appears to be part of the table setup.",
+          "uncertain": false
+        },
+        {
+          "class": "laptop",
+          "confidence": 0.418,
+          "bbox": [
+            297.1,
+            548.8,
+            341.4,
+            579.6
+          ],
+          "location": "lower-left",
+          "observation": "**laptop (conf 0.42, lower-left)**: Appears to be on one of the tables.",
+          "uncertain": false
+        },
+        {
+          "class": "umbrella",
+          "confidence": 0.411,
+          "bbox": [
+            624.4,
+            407.8,
+            670.5,
+            469.4
+          ],
+          "location": "centre",
+          "observation": "**umbrella (conf 0.41, centre)**: Appears to be set up near the center.",
+          "uncertain": false
+        },
+        {
+          "class": "laptop",
+          "confidence": 0.407,
+          "bbox": [
+            305.2,
+            522.5,
+            344.5,
+            546.8
+          ],
+          "location": "lower-left",
+          "observation": "**laptop (conf 0.41, lower-left)**: Appears to be on one of the tables.",
+          "uncertain": false
+        },
+        {
+          "class": "person",
+          "confidence": 0.404,
+          "bbox": [
+            342.7,
+            619.1,
+            384.6,
+            675.7
+          ],
+          "location": "lower-left",
+          "observation": "**person (conf 0.40, lower-left)**: Could not be confirmed.",
+          "uncertain": false
+        },
+        {
+          "class": "laptop",
+          "confidence": 0.369,
+          "bbox": [
+            365.1,
+            526.9,
+            403.9,
+            576.9
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "dining table",
+          "confidence": 0.354,
+          "bbox": [
+            256.6,
+            523.0,
+            408.4,
+            674.2
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "fire hydrant",
+          "confidence": 0.347,
+          "bbox": [
+            944.8,
+            569.7,
+            1031.3,
+            640.0
+          ],
+          "location": "lower-right",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "person",
+          "confidence": 0.346,
+          "bbox": [
+            292.7,
+            575.7,
+            335.6,
+            607.0
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "couch",
+          "confidence": 0.333,
+          "bbox": [
+            528.6,
+            328.2,
+            628.0,
+            395.2
+          ],
+          "location": "centre",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "bottle",
+          "confidence": 0.326,
+          "bbox": [
+            80.6,
+            464.8,
+            92.8,
+            505.0
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "dining table",
+          "confidence": 0.322,
+          "bbox": [
+            529.5,
+            338.4,
+            628.6,
+            394.5
+          ],
+          "location": "centre",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "person",
+          "confidence": 0.305,
+          "bbox": [
+            624.1,
+            391.8,
+            670.1,
+            468.8
+          ],
+          "location": "centre",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "dining table",
+          "confidence": 0.287,
+          "bbox": [
+            68.4,
+            559.7,
+            222.9,
+            640.7
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "laptop",
+          "confidence": 0.286,
+          "bbox": [
+            91.8,
+            552.7,
+            117.2,
+            582.4
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "laptop",
+          "confidence": 0.285,
+          "bbox": [
+            365.3,
+            526.3,
+            403.1,
+            553.6
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "bottle",
+          "confidence": 0.285,
+          "bbox": [
+            122.8,
+            519.1,
+            133.0,
+            550.1
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "chair",
+          "confidence": 0.284,
+          "bbox": [
+            560.9,
+            327.0,
+            601.7,
+            349.6
+          ],
+          "location": "centre",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "suitcase",
+          "confidence": 0.276,
+          "bbox": [
+            996.5,
+            607.5,
+            1030.4,
+            655.7
+          ],
+          "location": "lower-right",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "person",
+          "confidence": 0.274,
+          "bbox": [
+            344.0,
+            625.7,
+            375.4,
+            661.9
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "car",
+          "confidence": 0.273,
+          "bbox": [
+            944.8,
+            569.7,
+            1031.3,
+            640.0
+          ],
+          "location": "lower-right",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "person",
+          "confidence": 0.268,
+          "bbox": [
+            968.9,
+            613.6,
+            988.6,
+            640.0
+          ],
+          "location": "lower-right",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "bottle",
+          "confidence": 0.268,
+          "bbox": [
+            141.7,
+            532.6,
+            149.2,
+            552.4
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "bottle",
+          "confidence": 0.268,
+          "bbox": [
+            174.0,
+            519.2,
+            184.4,
+            552.1
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "knife",
+          "confidence": 0.266,
+          "bbox": [
+            172.7,
+            519.1,
+            187.0,
+            554.9
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "bottle",
+          "confidence": 0.266,
+          "bbox": [
+            156.9,
+            532.5,
+            168.4,
+            559.7
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "cup",
+          "confidence": 0.265,
+          "bbox": [
+            157.7,
+            532.9,
+            168.0,
+            558.1
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "spoon",
+          "confidence": 0.26,
+          "bbox": [
+            172.7,
+            519.1,
+            187.0,
+            554.9
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "suitcase",
+          "confidence": 0.255,
+          "bbox": [
+            944.7,
+            570.1,
+            997.5,
+            615.1
+          ],
+          "location": "lower-right",
+          "observation": "",
+          "uncertain": true
+        },
+        {
+          "class": "chair",
+          "confidence": 0.253,
+          "bbox": [
+            366.6,
+            634.2,
+            387.1,
+            674.2
+          ],
+          "location": "lower-left",
+          "observation": "",
+          "uncertain": true
+        }
+      ],
+      "thermal_observations": ""
+    },
+    {
+      "modality": "IR",
+      "analysis": "** The image depicts a rural or semi-rural area with vegetation covering the ground. There are several vehicles parked near a building, which could potentially be a house or a small structure. The presence of multiple kites suggests recreational activity. The low confidence levels indicate that some objects may not be definitively identifiable.",
+      "objects": [
+        {
+          "class": "toilet",
+          "confidence": 0.323,
+          "bbox": [
+            296.0,
+            309.0,
+            408.7,
+            450.0
+          ],
+          "location": "middle-left",
+          "observation": "Toilet: Confirmed, located in the center-left part of the image, showing a distinct shape and size typical of a toilet.",
+          "uncertain": true
+        },
+        {
+          "class": "person",
+          "confidence": 0.309,
+          "bbox": [
+            591.1,
+            403.7,
+            616.7,
+            442.1
+          ],
+          "location": "centre",
+          "observation": "Person: Confirmed, positioned in the center of the image, with a moderate thermal signature suggesting recent activity.",
+          "uncertain": true
+        },
+        {
+          "class": "kite",
+          "confidence": 0.302,
+          "bbox": [
+            900.8,
+            569.1,
+            951.8,
+            609.7
+          ],
+          "location": "lower-centre",
+          "observation": "Kite: Confirmed, located in the bottom center of the image, with a small thermal signature indicative of a kite.",
+          "uncertain": true
+        },
+        {
+          "class": "kite",
+          "confidence": 0.295,
+          "bbox": [
+            880.1,
+            540.8,
+            918.2,
+            576.8
+          ],
+          "location": "lower-centre",
+          "observation": "Kite: Confirmed, located in the bottom right corner of the image, with a small thermal signature indicative of a kite.",
+          "uncertain": true
+        },
+        {
+          "class": "teddy bear",
+          "confidence": 0.27,
+          "bbox": [
+            296.2,
+            308.6,
+            356.2,
+            426.8
+          ],
+          "location": "middle-left",
+          "observation": "Teddy Bear: Confirmed, located in the bottom left corner of the image, with a small thermal signature indicative of a teddy bear.",
+          "uncertain": true
+        },
+        {
+          "class": "kite",
+          "confidence": 0.269,
+          "bbox": [
+            1124.5,
+            552.6,
+            1147.9,
+            572.9
+          ],
+          "location": "lower-right",
+          "observation": "Kite: Confirmed, located in the top right corner of the image, with a small thermal signature indicative of a kite.",
+          "uncertain": true
+        }
+      ],
+      "thermal_observations": "** The thermal signature indicates the presence of engines, possibly from the vehicles and the building. The kites show no significant thermal signatures, suggesting they are not actively flying at the time the image was taken. The vegetation and the building have moderate thermal signatures, indicating recent use or activity."
+    }
+  ],
+  "detected_objects": [
+    {
+      "class": "person",
+      "confidence": 0.864,
+      "bbox": [
+        447.7,
+        358.3,
+        502.7,
+        529.1
+      ],
+      "location": "centre",
+      "observation": "**person (conf 0.86, centre)**: Could not be confirmed.",
+      "uncertain": false
+    },
+    {
+      "class": "person",
+      "confidence": 0.858,
+      "bbox": [
+        342.5,
+        353.1,
+        408.5,
+        477.1
+      ],
+      "location": "middle-left",
+      "observation": "**person (conf 0.86, middle-left)**: Could not be confirmed.",
+      "uncertain": false
+    },
+    {
+      "class": "person",
+      "confidence": 0.794,
+      "bbox": [
+        259.9,
+        574.0,
+        344.1,
+        639.9
+      ],
+      "location": "lower-left",
+      "observation": "**person (conf 0.79, lower-left)**: Could not be confirmed.",
+      "uncertain": false
+    },
+    {
+      "class": "dining table",
+      "confidence": 0.578,
+      "bbox": [
+        283.9,
+        526.6,
+        402.2,
+        616.0
+      ],
+      "location": "lower-left",
+      "observation": "**dining table (conf 0.58, lower-left)**: Appears to have some electronic devices and tools on it.",
+      "uncertain": false
+    },
+    {
+      "class": "person",
+      "confidence": 0.507,
+      "bbox": [
+        238.8,
+        622.9,
+        284.3,
+        675.8
+      ],
+      "location": "lower-left",
+      "observation": "**person (conf 0.51, lower-left)**: Could not be confirmed.",
+      "uncertain": false
+    },
+    {
+      "class": "dining table",
+      "confidence": 0.466,
+      "bbox": [
+        68.1,
+        464.3,
+        233.0,
+        642.0
+      ],
+      "location": "lower-left",
+      "observation": "**dining table (conf 0.47, lower-left)**: Appears to have some electronic devices and tools on it.",
+      "uncertain": false
+    },
+    {
+      "class": "person",
+      "confidence": 0.451,
+      "bbox": [
+        566.5,
+        347.5,
+        599.5,
+        379.5
+      ],
+      "location": "centre",
+      "observation": "**person (conf 0.45, centre)**: Could not be confirmed.",
+      "uncertain": false
+    },
+    {
+      "class": "bench",
+      "confidence": 0.449,
+      "bbox": [
+        528.7,
+        327.2,
+        628.8,
+        394.8
+      ],
+      "location": "centre",
+      "observation": "**bench (conf 0.45, centre)**: Appears to be part of the table setup.",
+      "uncertain": false
+    },
+    {
+      "class": "laptop",
+      "confidence": 0.418,
+      "bbox": [
+        297.1,
+        548.8,
+        341.4,
+        579.6
+      ],
+      "location": "lower-left",
+      "observation": "**laptop (conf 0.42, lower-left)**: Appears to be on one of the tables.",
+      "uncertain": false
+    },
+    {
+      "class": "umbrella",
+      "confidence": 0.411,
+      "bbox": [
+        624.4,
+        407.8,
+        670.5,
+        469.4
+      ],
+      "location": "centre",
+      "observation": "**umbrella (conf 0.41, centre)**: Appears to be set up near the center.",
+      "uncertain": false
+    },
+    {
+      "class": "laptop",
+      "confidence": 0.407,
+      "bbox": [
+        305.2,
+        522.5,
+        344.5,
+        546.8
+      ],
+      "location": "lower-left",
+      "observation": "**laptop (conf 0.41, lower-left)**: Appears to be on one of the tables.",
+      "uncertain": false
+    },
+    {
+      "class": "person",
+      "confidence": 0.404,
+      "bbox": [
+        342.7,
+        619.1,
+        384.6,
+        675.7
+      ],
+      "location": "lower-left",
+      "observation": "**person (conf 0.40, lower-left)**: Could not be confirmed.",
+      "uncertain": false
+    },
+    {
+      "class": "laptop",
+      "confidence": 0.369,
+      "bbox": [
+        365.1,
+        526.9,
+        403.9,
+        576.9
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "dining table",
+      "confidence": 0.354,
+      "bbox": [
+        256.6,
+        523.0,
+        408.4,
+        674.2
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "fire hydrant",
+      "confidence": 0.347,
+      "bbox": [
+        944.8,
+        569.7,
+        1031.3,
+        640.0
+      ],
+      "location": "lower-right",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "person",
+      "confidence": 0.346,
+      "bbox": [
+        292.7,
+        575.7,
+        335.6,
+        607.0
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "couch",
+      "confidence": 0.333,
+      "bbox": [
+        528.6,
+        328.2,
+        628.0,
+        395.2
+      ],
+      "location": "centre",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "bottle",
+      "confidence": 0.326,
+      "bbox": [
+        80.6,
+        464.8,
+        92.8,
+        505.0
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "dining table",
+      "confidence": 0.322,
+      "bbox": [
+        529.5,
+        338.4,
+        628.6,
+        394.5
+      ],
+      "location": "centre",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "person",
+      "confidence": 0.305,
+      "bbox": [
+        624.1,
+        391.8,
+        670.1,
+        468.8
+      ],
+      "location": "centre",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "dining table",
+      "confidence": 0.287,
+      "bbox": [
+        68.4,
+        559.7,
+        222.9,
+        640.7
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "laptop",
+      "confidence": 0.286,
+      "bbox": [
+        91.8,
+        552.7,
+        117.2,
+        582.4
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "laptop",
+      "confidence": 0.285,
+      "bbox": [
+        365.3,
+        526.3,
+        403.1,
+        553.6
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "bottle",
+      "confidence": 0.285,
+      "bbox": [
+        122.8,
+        519.1,
+        133.0,
+        550.1
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "chair",
+      "confidence": 0.284,
+      "bbox": [
+        560.9,
+        327.0,
+        601.7,
+        349.6
+      ],
+      "location": "centre",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "suitcase",
+      "confidence": 0.276,
+      "bbox": [
+        996.5,
+        607.5,
+        1030.4,
+        655.7
+      ],
+      "location": "lower-right",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "person",
+      "confidence": 0.274,
+      "bbox": [
+        344.0,
+        625.7,
+        375.4,
+        661.9
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "car",
+      "confidence": 0.273,
+      "bbox": [
+        944.8,
+        569.7,
+        1031.3,
+        640.0
+      ],
+      "location": "lower-right",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "person",
+      "confidence": 0.268,
+      "bbox": [
+        968.9,
+        613.6,
+        988.6,
+        640.0
+      ],
+      "location": "lower-right",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "bottle",
+      "confidence": 0.268,
+      "bbox": [
+        141.7,
+        532.6,
+        149.2,
+        552.4
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "bottle",
+      "confidence": 0.268,
+      "bbox": [
+        174.0,
+        519.2,
+        184.4,
+        552.1
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "knife",
+      "confidence": 0.266,
+      "bbox": [
+        172.7,
+        519.1,
+        187.0,
+        554.9
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "bottle",
+      "confidence": 0.266,
+      "bbox": [
+        156.9,
+        532.5,
+        168.4,
+        559.7
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "cup",
+      "confidence": 0.265,
+      "bbox": [
+        157.7,
+        532.9,
+        168.0,
+        558.1
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "spoon",
+      "confidence": 0.26,
+      "bbox": [
+        172.7,
+        519.1,
+        187.0,
+        554.9
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "suitcase",
+      "confidence": 0.255,
+      "bbox": [
+        944.7,
+        570.1,
+        997.5,
+        615.1
+      ],
+      "location": "lower-right",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "chair",
+      "confidence": 0.253,
+      "bbox": [
+        366.6,
+        634.2,
+        387.1,
+        674.2
+      ],
+      "location": "lower-left",
+      "observation": "",
+      "uncertain": true
+    },
+    {
+      "class": "toilet",
+      "confidence": 0.323,
+      "bbox": [
+        296.0,
+        309.0,
+        408.7,
+        450.0
+      ],
+      "location": "middle-left",
+      "observation": "Toilet: Confirmed, located in the center-left part of the image, showing a distinct shape and size typical of a toilet.",
+      "uncertain": true
+    },
+    {
+      "class": "person",
+      "confidence": 0.309,
+      "bbox": [
+        591.1,
+        403.7,
+        616.7,
+        442.1
+      ],
+      "location": "centre",
+      "observation": "Person: Confirmed, positioned in the center of the image, with a moderate thermal signature suggesting recent activity.",
+      "uncertain": true
+    },
+    {
+      "class": "kite",
+      "confidence": 0.302,
+      "bbox": [
+        900.8,
+        569.1,
+        951.8,
+        609.7
+      ],
+      "location": "lower-centre",
+      "observation": "Kite: Confirmed, located in the bottom center of the image, with a small thermal signature indicative of a kite.",
+      "uncertain": true
+    },
+    {
+      "class": "kite",
+      "confidence": 0.295,
+      "bbox": [
+        880.1,
+        540.8,
+        918.2,
+        576.8
+      ],
+      "location": "lower-centre",
+      "observation": "Kite: Confirmed, located in the bottom right corner of the image, with a small thermal signature indicative of a kite.",
+      "uncertain": true
+    },
+    {
+      "class": "teddy bear",
+      "confidence": 0.27,
+      "bbox": [
+        296.2,
+        308.6,
+        356.2,
+        426.8
+      ],
+      "location": "middle-left",
+      "observation": "Teddy Bear: Confirmed, located in the bottom left corner of the image, with a small thermal signature indicative of a teddy bear.",
+      "uncertain": true
+    },
+    {
+      "class": "kite",
+      "confidence": 0.269,
+      "bbox": [
+        1124.5,
+        552.6,
+        1147.9,
+        572.9
+      ],
+      "location": "lower-right",
+      "observation": "Kite: Confirmed, located in the top right corner of the image, with a small thermal signature indicative of a kite.",
+      "uncertain": true
+    }
+  ],
+  "scene_assessment": "",
+  "confidence_levels": "43 detections - mean confidence 0.37; high (>=0.60): 3; medium (0.40-0.59): 9; low/unconfirmed (<0.40): 31",
+  "operator_notes": "",
+  "metrics": {
+    "detector": "rf-detr-base+tiled",
+    "object_count": 43,
+    "inference_ms": 1388.8351917266846,
+    "mean_confidence": 0.36504474559495614
+  },
+  "cross_modal_correlation": "**\n- Person (conf 0.86, centre) - Both sensors detect this person.\n- Person (conf 0.86, middle-left) - Both sensors detect this person.\n- Person (conf 0.79, lower-left) - Both sensors detect this person.\n- Dining table (conf 0.58, lower-left) - Both sensors detect this dining table.\n- Laptop (conf 0.42, lower-left) - Both sensors detect this laptop.\n- Umbrella (conf 0.41, centre) - Both sensors detect this umbrella.\n- Bench (conf 0.45, centre) - Both sensors detect this bench.\n- Bottle (conf 0.33, lower-left) - Both sensors detect this bottle.\n- Chair (conf 0.28, centre) - Both sensors detect this chair.\n- Suitcase (conf 0.28, lower-right) - Both sensors detect this suitcase.\n- Car (conf 0.27, lower-right) - Both sensors detect this car.\n- Bottle (conf 0.27, lower-left) - Both sensors detect this bottle.\n- Bottle (conf 0.27, lower-left) - Both sensors detect this bottle.\n- Knife (conf 0.27, lower-left) - Both sensors detect this knife.\n- Cup (conf 0.26, lower-left) - Both sensors detect this cup.\n- Spoon (conf 0.26, lower-left) - Both sensors detect this spoon.\n- Teddy bear (conf 0.27, middle-left) - Both sensors detect this teddy bear.",
+  "fusion_assessment": "**\n- Warm vehicle (conf 0.32, lower-right) - This vehicle is warm and likely has a running engine based on the IR"
+}

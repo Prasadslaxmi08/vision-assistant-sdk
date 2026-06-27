@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vision-assistant-sdk"
+version = "0.1.0"
+description = "Reusable EO/IR Computer-Vision + Vision-Language AI engine that embeds into any camera / surveillance / GCS application."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [{ name = "EON Space Labs" }]
+keywords = ["computer-vision", "EO/IR", "surveillance", "object-detection",
+            "tracking", "VLM", "sensor-fusion", "GCS", "SDK"]
+
+# Heavy / hardware-specific deps (torch, RF-DETR, etc.) are intentionally NOT
+# pinned here — install them from requirements.txt / requirements-rfdetr.txt per
+# the CUDA notes in the README. This metadata is what makes the SDK importable as
+# an external package (`pip install -e .`) so a host app can consume it without
+# copying any source.
+
+[tool.setuptools]
+# The engine lives under the top-level `src` package. A host installs this once
+# and imports `from src.engine import VisionAssistant`.
+packages = ["src"]
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+exclude = ["desktop*", "future-ai-mission-analyst*", "tests*", "docs*",
+           "examples*", "outputs*", "logs*"]

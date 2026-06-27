@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Models / weights (auto-downloaded on first run)
+*.pt
+*.onnx
+*.engine
+models/
+
+# Runtime outputs
+logs/
+outputs/
+*.log
+
+# Media samples
+samples/
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/

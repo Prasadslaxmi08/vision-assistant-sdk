@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="560" viewBox="0 0 940 560" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 z" fill="#0ea5a0"/>
+    </marker>
+    <style>
+      .title{font-size:20px;font-weight:700;fill:#0b3b39}
+      .h{font-size:14px;font-weight:700;fill:#0b3b39}
+      .t{font-size:12px;fill:#244}
+      .s{font-size:11px;fill:#567}
+      .api{font-size:12px;font-weight:700;fill:#0a6}
+      .box{fill:#ffffff;stroke:#cfe6e3;stroke-width:1.5;rx:10}
+      .gcs{fill:#eef6f5;stroke:#9fcfca;stroke-width:1.5}
+      .sdk{fill:#e8fbf7;stroke:#5fc9bf;stroke-width:1.5}
+      .seam{fill:#fff7e6;stroke:#f0c674;stroke-width:1.5}
+    </style>
+  </defs>
+
+  <text x="30" y="34" class="title">Vision Assistant SDK — embedded in a Ground Control Station</text>
+  <text x="30" y="54" class="s">The GCS keeps owning capture, PTZ, zoom, recording, telemetry &amp; UI. The SDK is a pure AI layer: it takes frames, returns data.</text>
+
+  <!-- GCS host box -->
+  <rect x="24" y="74" width="420" height="460" rx="12" class="gcs"/>
+  <text x="44" y="100" class="h">HOST GCS  (LUMIRA — Tkinter, unchanged)</text>
+
+  <rect x="44" y="116" width="380" height="58" rx="10" class="box"/>
+  <text x="60" y="138" class="h">Camera / RTSP capture  (OpenCV)</text>
+  <text x="60" y="158" class="t">RtspStream._capture_loop → VideoPlayer._ingest(frame)</text>
+
+  <rect x="44" y="300" width="380" height="58" rx="10" class="box"/>
+  <text x="60" y="322" class="h">Display pipeline  (VideoPlayer._build_display)</text>
+  <text x="60" y="342" class="t">letterbox → HUD → AI overlay → Tk label</text>
+
+  <rect x="44" y="372" width="380" height="42" rx="10" class="box"/>
+  <text x="60" y="398" class="t">PTZ · zoom · recording · telemetry · maps  (untouched)</text>
+
+  <rect x="44" y="426" width="380" height="42" rx="10" class="box"/>
+  <text x="60" y="452" class="h">＋ one button:  ◬ VISION AI  (toggle)</text>
+
+  <!-- Seam: bridge -->
+  <rect x="478" y="150" width="120" height="250" rx="12" class="seam"/>
+  <text x="496" y="172" class="h">Bridge</text>
+  <text x="492" y="192" class="s">ai_assistant.py</text>
+  <text x="492" y="208" class="s">(host glue,</text>
+  <text x="492" y="222" class="s">~5 lines wired)</text>
+  <text x="492" y="250" class="api">submit_frame()</text>
+  <text x="492" y="300" class="api">overlay_payload()</text>
+  <text x="492" y="320" class="api">on_result()</text>
+  <text x="492" y="372" class="s">no SDK code</text>
+  <text x="492" y="386" class="s">copied in</text>
+
+  <!-- SDK box -->
+  <rect x="632" y="74" width="284" height="460" rx="12" class="sdk"/>
+  <text x="652" y="100" class="h">VISION ASSISTANT SDK</text>
+  <text x="652" y="118" class="s">imported as an external package</text>
+
+  <rect x="652" y="132" width="244" height="46" rx="10" class="box"/>
+  <text x="668" y="152" class="h">Input — ExternalFrameSource</text>
+  <text x="668" y="170" class="t">add_frame_source("EO"/"IR")</text>
+
+  <rect x="652" y="190" width="244" height="92" rx="10" class="box"/>
+  <text x="668" y="210" class="h">AI Core</text>
+  <text x="668" y="230" class="t">Detector (RF-DETR / YOLOv11)</text>
+  <text x="668" y="248" class="t">ByteTrack + ReID</text>
+  <text x="668" y="266" class="t">EO/IR fusion · Qwen2.5-VL</text>
+
+  <rect x="652" y="294" width="244" height="56" rx="10" class="box"/>
+  <text x="668" y="314" class="h">Intelligence Layer</text>
+  <text x="668" y="332" class="t">events · scene understanding · summaries</text>
+
+  <rect x="652" y="362" width="244" height="86" rx="10" class="box"/>
+  <text x="668" y="382" class="h">Output Layer</text>
+  <text x="668" y="400" class="t">overlay_payload()  → boxes (data)</text>
+  <text x="668" y="418" class="t">on_result(cb)  → events / summary JSON</text>
+  <text x="668" y="436" class="t">frame_view() · scene_json()</text>
+
+  <text x="652" y="474" class="s">Runs on a background inference thread.</text>
+  <text x="652" y="490" class="s">The live feed is never blocked by AI.</text>
+
+  <!-- arrows: capture -> ingest -> bridge.submit -> SDK input -->
+  <line x1="234" y1="174" x2="234" y2="300" stroke="#0ea5a0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="244" y="240" class="s">raw BGR frame</text>
+
+  <!-- ingest -> bridge submit_frame -->
+  <path d="M424 145 H538 V196" fill="none" stroke="#0ea5a0" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- bridge submit -> SDK input -->
+  <line x1="598" y1="200" x2="650" y2="160" stroke="#0ea5a0" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- SDK output -> bridge overlay/result -->
+  <line x1="650" y1="392" x2="600" y2="305" stroke="#0ea5a0" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- bridge overlay -> display pipeline -->
+  <path d="M538 312 H460 V330 H424" fill="none" stroke="#0ea5a0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="250" y="292" class="s">boxes + intel drawn on the existing video</text>
+
+  <!-- button -> bridge -->
+  <path d="M424 447 H560 V392" fill="none" stroke="#b8862b" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <text x="436" y="492" class="s">toggle starts/stops the engine (off-thread)</text>
+</svg>

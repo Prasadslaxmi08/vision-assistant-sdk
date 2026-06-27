@@ -1,0 +1,22 @@
+# ──────────────────────────────────────────────────────────────────────────
+# Optional RF-DETR detector backend (Roboflow `rfdetr`).
+# ──────────────────────────────────────────────────────────────────────────
+#
+# RF-DETR is a *swappable replacement* for YOLOv11 — one detector is loaded at a
+# time, so peak VRAM stays one detector + the Qwen VLM (same 8 GB envelope).
+#
+# Install (after the base requirements + the cu128 PyTorch, see requirements.txt):
+#     pip install -r requirements-rfdetr.txt
+#
+# Then switch backends in config/config.yaml:
+#     detection:
+#       backend: "rf_detr"
+#       rf_detr:
+#         variant: "base"     # nano | small | medium | base | large
+#
+# Note: pin/verify the torch version rfdetr pulls against your cu128 install so it
+# doesn't downgrade PyTorch. Confirm the chosen variant's VRAM + Qwen-3B(4-bit)
+# fits in 8 GB on first run.
+# ──────────────────────────────────────────────────────────────────────────
+
+rfdetr>=1.0.0

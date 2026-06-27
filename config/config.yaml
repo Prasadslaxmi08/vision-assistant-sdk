@@ -1,0 +1,257 @@
+# ════════════════════════════════════════════════════════════════════════════
+# EO/IR Mission Intelligence Assistant — Master Configuration
+# ════════════════════════════════════════════════════════════════════════════
+# All runtime behaviour is driven from this file. It is loaded by
+# src/config/settings.py into typed Pydantic models. Override the path with the
+# environment variable EOIR_CONFIG, or edit values in place.
+# ════════════════════════════════════════════════════════════════════════════
+
+# ── Global / hardware ───────────────────────────────────────────────────────
+system:
+  device: "cuda:0"            # "cuda:0" | "cpu". Auto-falls back to CPU if no GPU.
+  half_precision: true        # FP16 for YOLO inference (big speedup on RTX 50xx).
+  log_level: "INFO"           # DEBUG | INFO | WARNING | ERROR
+  log_dir: "logs"
+  output_dir: "outputs"       # saved reports, annotated clips, mission summaries
+
+# ── Frame ingestion / buffering ─────────────────────────────────────────────
+ingestion:
+  target_fps: 0               # 0 = source-native fps. >0 throttles ingestion.
+  buffer_size: 64             # max frames held in the capture->infer queue
+  drop_policy: "newest_keeps" # drop oldest when full -> always process latest frame
+  rtsp_transport: "tcp"       # "tcp" (reliable) | "udp" (low-latency)
+  rtsp_reconnect_delay: 3.0   # seconds between reconnect attempts
+  rtsp_max_reconnects: -1     # -1 = retry forever
+  read_timeout: 10.0          # seconds before a stalled stream is considered dead
+
+# ── Object detection (YOLOv11) ──────────────────────────────────────────────
+detection:
+  backend: "rf_detr"          # PRIMARY detector: "rf_detr" (transformer) | "yolo11".
+                              # Switch the whole detector here — no code change.
+                              # rf_detr needs the optional `rfdetr` package
+                              # (pip install -r requirements-rfdetr.txt); set
+                              # "yolo11" for the instant fallback.
+  model_path: "yolo11m.pt"    # auto-downloads if absent. n/s/m/l/x variants. (yolo11)
+  conf_threshold: 0.25        # lowered for small/low-contrast object recall
+  iou_threshold: 0.50
+  img_size: 640
+  max_detections: 300
+  # COCO class ids of interest for ISR missions; null = keep all classes.
+  # 0 person, 1 bicycle, 2 car, 3 motorcycle, 5 bus, 6 train, 7 truck,
+  # 4 airplane, 8 boat.
+  classes: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  # Report filter — the "class selector". COCO class NAMES to surface in the
+  # report/overlay; null = report everything. Applied AFTER detection (recall
+  # preserved). The demo's class selector edits this; engine + CLI read it.
+  # Example (ISR): ["person","bicycle","car","motorcycle","airplane","bus",
+  #                 "train","truck","boat"]
+  report_classes: null
+  # RF-DETR options — only read when backend == "rf_detr" (needs the optional
+  # `rfdetr` package). Swappable replacement for YOLO (one detector at a time);
+  # confirm variant VRAM + Qwen-3B(4-bit) < 8 GB on the box before switching.
+  rf_detr:
+    variant: "base"           # nano | small | medium | base | large
+    weights: ""               # path or hub id; empty = variant's pretrained COCO weights
+    img_size: 560             # RF-DETR native resolution (multiple of 56)
+  # Sliced (tiled) inference — recovers small/distant/low-contrast objects that a
+  # single downsampled full-frame pass misses. Applied to still-image analysis;
+  # the real-time engine keeps the bare detector. Disable with enabled: false.
+  tiling:
+    enabled: true
+    tile: 640                 # tile size (px), ~the detector's native resolution
+    overlap: 0.2              # overlap fraction between adjacent tiles
+    min_side: 900             # only tile when the longest image side exceeds this
+    iou_merge: 0.55           # NMS IoU to merge full-frame + tile detections
+    max_tiles: 24             # safety cap on tiles per image
+
+# ── Multi-object tracking (ByteTrack via supervision) ───────────────────────
+tracking:
+  track_activation_threshold: 0.25   # min conf to start/continue a track
+  lost_track_buffer: 30              # frames a track survives without detection
+  minimum_matching_threshold: 0.80   # IoU match threshold
+  frame_rate: 30                     # expected fps (tunes Kalman motion model)
+  minimum_consecutive_frames: 3      # frames before a track is "confirmed"
+
+# ── Re-identification (stable ids across track breaks) ──────────────────────
+reid:
+  enabled: true
+  # Classes that attempt appearance matching when re-entering / re-acquired.
+  # Other classes still get a stable id but a fresh one per new raw track.
+  classes: ["person"]
+  similarity_threshold: 0.55    # cosine sim on the appearance signature (0-1).
+                                # Lower = more re-matches (risk: merging people).
+                                # Raise toward 0.65 if different people get merged.
+  max_age_sec: 30.0             # how long a departed identity stays matchable
+  max_distance_px: 0.0          # spatial gate on re-entry; 0 = off (allow re-entry
+                                # from any edge of the frame)
+  embedding_refresh_frames: 12  # EMA-refresh a live track's appearance every N frames
+  gallery_max_size: 96          # max identities remembered at once
+  hist_bins: 32                 # appearance histogram resolution per channel
+  min_crop_px: 16               # skip ReID on crops smaller than this
+  track_grace_frames: 30        # keep a raw->global mapping this long after a track
+                                # disappears (set equal to tracking.lost_track_buffer)
+
+# ── Vision Language Model (Qwen2.5-VL) ──────────────────────────────────────
+vlm:
+  enabled: true
+  model_id: "Qwen/Qwen2.5-VL-3B-Instruct"
+  # 3B chosen for comfortable headroom on the 8 GB RTX 5060 (fits with YOLO,
+  # faster, low OOM risk). Switch to "Qwen/Qwen2.5-VL-7B-Instruct" once stable.
+  quantization: "4bit"        # "4bit" | "8bit" | "none"
+  device: "cuda:0"
+  max_new_tokens: 384
+  temperature: 0.2
+  # Resize frames sent to the VLM to cap visual-token count (and VRAM/latency).
+  min_pixels: 200704          # 256 * 28 * 28
+  max_pixels: 1003520         # 1280 * 28 * 28
+  # Periodic trigger: run the VLM at least this often even with no events.
+  periodic_interval_sec: 5.0
+  # Event-driven trigger: also run when EventManager raises a significant event.
+  trigger_on_events: true
+  # Hard rate limit so a storm of events can't queue unbounded VLM calls.
+  min_seconds_between_calls: 1.5
+  # If the queue backs up beyond this, drop pending VLM requests (keep newest).
+  max_pending_requests: 2
+
+# ── Event detection thresholds ──────────────────────────────────────────────
+events:
+  # Pixel-distance (per frame) below which a track is considered "stopped".
+  stop_speed_px: 1.5
+  stop_min_frames: 15              # frames stationary before "STOPPED" fires
+  # Heading change (degrees) over the smoothing window to flag a turn.
+  direction_change_deg: 45.0
+  direction_min_speed_px: 3.0      # ignore heading noise on near-stationary tracks
+  motion_window: 8                 # frames used to smooth velocity/heading
+  # "Person entering vehicle": person track disappears near a vehicle bbox.
+  enter_vehicle_iou: 0.15
+  enter_vehicle_distance_px: 80.0
+  # New thermal signature (IR mode): brightness spike in a fresh region.
+  thermal_hotspot_threshold: 200   # 0-255 on the IR/gray channel
+  thermal_min_area_px: 150
+  # De-duplicate identical events within this window.
+  cooldown_sec: 2.0
+
+# ── Spatial reasoning (V2 — object-to-object relationships) ─────────────────
+spatial:
+  enabled: true
+  history_len: 16
+  proximity_distance_px: 80.0      # center distance under which objects are "close"
+  proximity_min_frames: 8          # sustained frames before PROXIMITY fires
+  following_min_frames: 15
+  following_max_lag_px: 140.0      # max follower→leader gap
+  following_min_speed_px: 1.5      # both must move at least this fast (px/frame)
+  group_min_size: 3                # persons clustered before a GROUP forms
+  group_radius_px: 120.0
+  group_min_frames: 10
+  # Keep-out zones as normalised [x1,y1,x2,y2] rectangles (0..1). Example:
+  #   restricted_zones: [[0.0, 0.0, 0.25, 1.0]]   # left quarter of the frame
+  restricted_zones: []
+  restricted_min_frames: 3
+  cooldown_sec: 8.0                # min seconds between re-firing the same relation
+
+# ── EO/IR fusion (V2 — thermal ↔ detection correlation, IR frames) ──────────
+fusion:
+  enabled: true
+  # Thermal hotspot extraction. The IR feed is 8-bit AGC (no fixed radiometric
+  # scale), so "hot" is an adaptive per-frame percentile, not a constant level.
+  adaptive: true
+  white_hot: true             # true = hot is bright; false = black-hot (hot is dark)
+  hot_percentile: 99.0        # adaptive: pixels above this percentile = "hot"
+  hot_threshold: 200          # fixed fallback (used only when adaptive: false)
+  min_hot_threshold: 70       # floor so a flat/cold IR frame yields no blobs
+  min_blob_area_px: 120       # ignore hot blobs smaller than this (full-res px)
+  max_blobs: 20               # cap hot blobs processed per frame
+  blob_downscale_width: 640   # downscale IR to ≤ this width before hotspot extraction,
+                              # then scale blob coords back up (M5/B6). 0 = off; no-op
+                              # when the IR frame is already this small or smaller.
+  # Cross-sensor correlation (IR blob projected into EO via the registration).
+  correlate_overlap: 0.30     # min blob-covered fraction to bind a hotspot to an EO detection
+  concealed_min_area_px: 150  # hot blob this big, inside EO view, NO detection = hidden target
+  concealed_cell_px: 48       # spatial cell for de-duplicating concealed-heat alerts
+  min_frames: 4               # sustained frames before a fusion assessment fires
+  cooldown_sec: 8.0
+
+# ── Automatic EO/IR cross-sensor registration (no calibration needed) ───────
+# The EO and IR optics are unaligned with different FOV/zoom and provide no
+# boresight/telemetry. The IR→EO mapping is estimated online from targets both
+# sensors see (RANSAC over object/blob geometry), so fusion needs no calibration.
+registration:
+  enabled: true
+  inlier_tol_frac: 0.05       # target-match tolerance as a fraction of EO width
+  min_lock_inliers: 2         # shared targets required to hold a lock (≥3 = unambiguous)
+  lock_persist_cycles: 3      # consecutive good cycles before declaring LOCKED
+  unlock_grace_cycles: 6      # cycles of no fit tolerated before dropping the lock
+  smoothing: 0.6              # temporal EMA on the transform (0 = snap, →1 = sluggish)
+  max_warm_sec: 3.0           # reuse the last transform up to this long without a new fit
+  class_constrained: true     # only match same-class targets (person↔person, vehicle↔vehicle)
+  scale_prior_tol: 3.0        # accept fits within this factor of the FOV-ratio scale prior
+  # Spike-proofing the RANSAC (M5/B5): bound the work so a busy scene can't spike it.
+  max_points: 8               # cap control points/sensor (strongest by weight) — bounds the
+                              # 2x2 hypothesis enumeration; raise for more accuracy at more cost
+  early_exit_inliers: 4       # stop the RANSAC once a fit reaches this many matched targets
+  update_interval: 2          # re-estimate the transform every Nth fuse cycle (1 = every cycle);
+                              # the WARM/lock hold reuses the last transform in between
+
+# ── Sensor optics (all OPTIONAL; only used to seed a registration scale prior) ─
+# Fill these in if known — they speed up fusion lock but are not required.
+eo_sensor:
+  name: "EO"
+  hfov_deg: 66.0              # wide field of view; 40x zoom narrows this live
+  width: 0                    # delivered frame width in px (0 = unknown)
+ir_sensor:
+  name: "IR"
+  pixel_pitch_um: 12.0
+  focal_length_mm: 50.0
+  hfov_deg: 12.0
+  width: 0                    # e.g. 640 — set this + EO width to enable the scale prior
+  radiometric: false         # 8-bit AGC stream
+
+# ── Intelligence Layer (live aggregation — no persistence) ──────────────────
+# Event generation, scene understanding and rolling summaries are kept in memory
+# and exposed via JSON/callbacks. Long-term archives, threat scoring, querying and
+# report generation moved to the future AI Mission Analyst repo.
+# ── Object Reasoning Engine (refine raw detections before report + VLM) ─────
+object_reasoning:
+  enabled: true
+  cluster_iou: 0.45         # group overlapping detections as one physical object
+  confirm_threshold: 0.45   # >= confirmed; below = a 'possible' (low-confidence) observation
+  alt_margin: 0.55          # keep an alternative class if adj-conf >= margin * primary
+  interaction_pad_frac: 0.35  # person↔object proximity gate (fraction of person size)
+  context_boost: 1.30       # plausible-class multiplier in the matching scene
+  context_penalty: 0.80     # implausible-class multiplier in the matching scene
+
+intelligence:
+  summary_interval_sec: 15.0       # rolling natural-language summary cadence
+  timeline_max_events: 500         # cap timeline length kept in memory
+  intel_feed_history: 12           # number of intel messages kept in the feed
+  max_vlm_objects: 12              # max detections sent to the VLM for per-object
+                                   # notes (all detections still appear in the report)
+
+# ── Demo-app rendering (overlay compositing) ────────────────────────────────
+ui:
+  title: "Vision Assistant"
+  max_display_width: 1280
+  show_confidence: true
+  show_track_ids: true
+  feed_refresh_sec: 0.03           # demo feed refresh period (~30 Hz target). The
+                                   # display is decoupled from inference, so this is
+                                   # the feed rate, not the detector rate.
+
+# ── AI stage cadence (latency roadmap M5/B7 — spike-proofing) ───────────────
+# Detection, tracking, ReID and per-frame mission-memory recording always run
+# every frame; only the heavier synthesis stages below are throttled. Defaults of
+# 1 reproduce the every-frame behaviour exactly. Raise on the box if the profiling
+# dashboard shows spatial/threat/fusion spikes — no output is lost, only its rate
+# (events on skipped frames are folded into the next reasoning pass).
+cadence:
+  reasoning_interval: 1       # run spatial clustering + threat re-scoring every Nth EO frame
+  fusion_interval: 1          # run the EO/IR fuse step every Nth inference loop cycle
+
+# ── Runtime profiling (latency roadmap Milestone 0 — dev instrumentation) ────
+# Off by default and zero-overhead when disabled. Enable to measure real
+# per-stage latency (p50/p95), capture-vs-display FPS, queue depths and frame
+# age on the target box, then flip `dashboard` on to view it in the operator UI.
+profiling:
+  enabled: false              # collect per-stage timings / rates / gauges
+  window: 240                 # samples retained per stage for p50/p95
+  dashboard: false            # show the dev-only profiling panel in the UI

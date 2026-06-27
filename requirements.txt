@@ -1,0 +1,47 @@
+# ──────────────────────────────────────────────────────────────────────────
+# Vision Assistant SDK — Python dependencies
+# Target: Python 3.10, NVIDIA RTX 5060 (8 GB), CUDA 12.x
+# ──────────────────────────────────────────────────────────────────────────
+#
+# IMPORTANT (RTX 50-series / Blackwell):
+#   The RTX 5060 requires CUDA 12.8+ wheels. Install PyTorch FIRST from the
+#   CUDA 12.8 index, then install the rest of this file:
+#
+#     pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+#     pip install -r requirements.txt
+#
+# The PRIMARY detector is RF-DETR (detection.backend: "rf_detr"). Install it via
+# requirements-rfdetr.txt below. YOLOv11 (ultralytics) ships here as the one-line
+# fallback (set detection.backend: "yolo11").
+# ──────────────────────────────────────────────────────────────────────────
+
+# --- AI Core: detection / tracking ---
+# Primary detector — RF-DETR (transformer). Optional wheel, installed separately
+# to keep torch resolution clean:
+#     pip install -r requirements-rfdetr.txt
+ultralytics>=8.3.0           # YOLOv11 — fallback detector backend
+# ByteTrack tracker + detection containers. Pinned <0.30 — supervision marked
+# sv.ByteTrack deprecated in 0.28 and removes it in 0.30.
+supervision>=0.25.0,<0.30.0
+opencv-python>=4.10.0        # RTSP / video ingestion, overlay drawing
+numpy>=1.26,<2.2
+pillow>=10.3.0
+
+# --- AI Core: Vision-Language reasoning (Qwen2.5-VL) ---
+transformers>=4.49.0         # ships Qwen2.5-VL support
+accelerate>=1.2.0
+qwen-vl-utils>=0.0.8         # vision pre-processing helpers for Qwen2.5-VL
+bitsandbytes>=0.45.0         # 4-bit / 8-bit quantization (required on 8 GB GPUs)
+sentencepiece>=0.2.0
+einops>=0.8.0
+
+# --- Desktop demo (PySide6 / Qt) ---
+PySide6>=6.6.0               # the demonstration app (python -m desktop)
+
+# --- Telemetry / config / utils / logging ---
+nvidia-ml-py>=12.0.0         # NVML GPU utilisation telemetry (optional)
+pyyaml>=6.0.2
+pydantic>=2.9.0
+loguru>=0.7.2
+psutil>=6.1.0
+av>=13.0.0                   # PyAV: robust RTSP / video decoding backend (optional)
